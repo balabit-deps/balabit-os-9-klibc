@@ -1,3 +1,29 @@
+klibc (2.0.10-4ubuntu0.1) jammy-security; urgency=medium
+
+  * SECURITY UPDATE: improper pointer arithmetic
+    - debian/patches/CVE-2016-9840.patch: remove offset pointer optimization
+      in usr/klibc/zlib/inftrees.c.
+    - CVE-2016-9840
+  * SECURITY UPDATE: improper pointer arithmetic
+    - debian/patches/CVE-2016-9841.patch: remove offset pointer optimization
+      in usr/klibc/zlib/inffast.c.
+    - CVE-2016-9841
+  * SECURITY UPDATE: memory corruption during compression
+    - debian/patches/CVE-2018-25032.patch: addresses a bug that can crash
+      deflate on rare inputs when using Z_FIXED.
+    - CVE-2018-25032
+  * SECURITY UPDATE: heap-based buffer over-read
+    - debian/patches/CVE-2022-37434-1.patch: adds an extra condition to check
+      if state->head->extra_max is greater than len before copying, and moves
+      the len assignment to be placed before the check in
+      usr/klibc/zlib/inflate.c.
+    - debian/patches/CVE-2022-37434-2.patch: in the previous patch, the
+      placement of the len assignment was causing issues so it was moved
+      within the conditional check.
+    - CVE-2022-37434
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Sat, 13 Apr 2024 12:34:04 +0300
+
 klibc (2.0.10-4) unstable; urgency=medium
 
   * d/control, d/rules: Remove ccache from $PATH instead of Build-Conflicting
